@@ -1,3 +1,4 @@
+import { People } from '../data/people.interface';
 import { findPeople, findPerson } from '../data/people.service';
 
 export const jsonAPI = {
