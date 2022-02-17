@@ -9,8 +9,7 @@ import { People } from './people.interface';
 /**
  * In-Memory Store
  */
-
-let people: People = {
+let peopleJSON: People = {
   'person': [
     {
       id: 10,
@@ -30,10 +29,37 @@ let people: People = {
   ]
 }
 
+let peopleXML: People = {
+  'person': [
+    {
+      id: 3,
+      firstName: 'Jen',
+      lastName: 'Doe'
+    },
+    {
+      id: 6,
+      firstName: 'Stephanie',
+      lastName: 'Joe'
+    },
+    {
+      id: 1,
+      firstName: 'Victoria',
+      lastName: 'Doe'
+    }
+  ]
+}
+
 /**
  * Service Methods
  */
+export const findPeople = async (type: String): Promise<Person[]> => {
+  return type === 'json'
+    ? peopleJSON.person
+    : peopleXML.person;
+}
 
-export const findPeople = async (): Promise<Person[]> => people.person;
-
-export const findPerson = async (id: number): Promise<Person[]> => people.person.filter(person => person.id === id);
+export const findPerson = async (id: number, type: String): Promise<Person[]> => {
+  return type === 'json'
+    ? peopleJSON.person.filter(person => person.id === id)
+    : peopleXML.person.filter(person => person.id === id);
+}
